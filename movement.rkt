@@ -1,5 +1,7 @@
 #lang racket
 
+
+
 ; A Jump is a (jump rank:Int file:Int dist:Nat) where:
 ; - rank denotes how many ranks the piece jumps forward
 ; - file denotes how many files the piece jumps rightwards
@@ -21,7 +23,7 @@
 
 ; A Piece is a [ListOf Movement] such as:
 
-(define rook   (full-symmetry (move "move or capture" (list (jump 1 0 0)))))
+(define rook   (full-symmetry (move "move or capture" (list (jump 1 0 0))))) 
 (define bishop (full-symmetry (move "move or capture" (list (jump 1 1 0)))))
 (define knight (full-symmetry (move "move or capture" (list (jump 1 2 1)))))
 (define queen  (append rook bishop))
@@ -35,9 +37,15 @@
 
 ; The above can be written more succinctly using macros:
 
+;; dummy simetries
+(define full-symmetry
+  'empty)
+(define vertical-symmetry
+  'empty)
+#|
 (piece R [(1,0)+]*)
 (piece B [(1,1)+]*)
 (piece N [(1,2)]*)
 (piece Q R B)
 (piece K [(1,0)]* [(1,1)]*)
-(piece P m[(1,0)] c[(1,1)]v)
+(piece P m[(1,0)] c[(1,1)]v)|#
