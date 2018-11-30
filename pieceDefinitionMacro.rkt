@@ -17,21 +17,26 @@
 ; a b c symmetry mv
 
 (define-syntax-rule (move-set y x symmetry-type move-type)
-  (define action
+  (define action-type
     (cond
       [(string=? move-type "m") (let [action "only move"])]
       [(string=? move-type "c") (let [action "only capture"])]
       [(string=? move-type "mc") (let [action "move or capture"])]
       [(string=? move-type "cm") (let [action "move or capture"])]))
   
-  
+  (define apply-move
+    (cond
+      [(zero? symmetry-type) (full-symmetry (move action (list (jump 1 0 0))))]
+      [(positive? symmetry-type) (vertical-symmetry (move action (list (jump 1 0 0))))]
+      [(negative? symmetry-type) (horizontal-symmetry (move action (list (jump 1 0 0))))])
+    )
   #;(cond
     [(string=? move-type "m") (let [action "only move"])]
     [(string=? move-type "c") (let [action "only capture"])]
     [(string=? move-type "mc") (let [action "move or capture"])]
     [(string=? move-type "cm") (let [action "move or capture"])])
   
-  (cond
+  #;(cond
     [(zero? symmetry-type) (full-symmetry (move action (list (jump 1 0 0))))]
     [(positive? symmetry-type) (vertical-symmetry (move action (list (jump 1 0 0))))]
     [(negative? symmetry-type) (horizontal-symmetry (move action (list (jump 1 0 0))))])
